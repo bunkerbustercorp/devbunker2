@@ -1,0 +1,22 @@
+.sidebar-wrapper {
+    //background-color: white;
+    width: 16rem;
+    height: 100%;
+    margin-top: 1rem;
+    //box-shadow: 1px 0px 0px 0px rgba(0,0,0,0.2);
+    position: fixed;
+    z-index: $z-index-sidebar;
+    
+    .sidebar {
+        padding-left: 1rem;
+        margin: 0 auto;
+        width: 16rem;
+        height: 100%;
+        position: relative;
+    }
+}
+
+.sidebar-spacer {
+    width: 16rem;
+    height: 100%;
+}

@@ -1,0 +1,7 @@
+# dependencies
+node_modules
+.env
+
+# misc
+yarn.lock
+npm-debug.log
