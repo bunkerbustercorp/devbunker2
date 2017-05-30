@@ -5,8 +5,8 @@ const configs = {
         backendUrl: 'http://bunkerbustercorp.ipdisk.co.kr:4000'
     },
     development: {
-        url: 'http://localhost:3000',
-        backendUrl: 'http://localhost:4000'
+        url: 'http://bunkerbustercorp.ipdisk.co.kr:3000',
+        backendUrl: 'http://bunkerbustercorp.ipdisk.co.kr:4000'
     }
 };
 

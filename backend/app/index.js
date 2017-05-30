@@ -6,14 +6,14 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 
+// DB 모듈 로드
+const mongoose = require('mongoose');
+
 // 라우터
 const api = require('./api');
 
 // Koa 인스턴스 생성
 const app = new Koa();
-
-// 데이터베이스 연결
-const models = require('./models');
 
 // body-parser 적용
 app.use(bodyParser());
@@ -25,5 +25,14 @@ router.use('/api', api.routes());
 
 app.use(router.routes());
 app.use(router.allowedMethods());
+
+const config = require('../config/database');
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', () => { console.log('Connected to mongodb server'); });
+const dbUrl = `mongodb://${config.username}:${process.env.DATABASE_PASSWORD}@${config.host}/${config.database}`;
+
+mongoose.connect(dbUrl);
 
 app.listen(4000);

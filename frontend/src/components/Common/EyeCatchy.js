@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 
 
@@ -49,7 +50,7 @@ class EyeCatchy extends Component {
     }
 }
 
-EyeCatchy.propTypes = {
+EyeCatchy.PropTypes = {
     onHide: PropTypes.func
 }
 
