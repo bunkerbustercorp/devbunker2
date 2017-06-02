@@ -1,10 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BrandLogo = () => {
     return (
-        <div className="brand-logo">
-            DevBunker
-        </div>
+        <Link className="brand-logo" to='/'>DevBunker</Link>
     );
 };
 

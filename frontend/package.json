@@ -2,14 +2,19 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4000",
   "dependencies": {
     "axios": "^0.16.1",
     "immutable": "^3.8.1",
     "include-media": "^1.4.9",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.4",
     "open-color": "^1.5.1",
     "prop-types": "^15.5.10",
+    "query-string": "^4.3.4",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
+    "react-apollo": "^1.2.0",
     "react-dom": "^15.5.4",
     "react-hot-loader": "next",
     "react-onclickoutside": "^5.11.1",
@@ -21,7 +26,8 @@
     "redux-promise-middleware": "^4.2.0",
     "sass-loader": "^6.0.3",
     "semantic-ui-css": "^2.2.10",
-    "semantic-ui-react": "^0.68.2"
+    "semantic-ui-react": "^0.68.2",
+    "styled-components": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",

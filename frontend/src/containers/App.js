@@ -2,22 +2,27 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import environment from 'environment';
+import { withRouter } from 'react-router'
 
 // routes
-import Routes from './Routes/Routes';
+import Routes from './Routes';
 
 // redux
 import * as header from 'redux/modules/base/header';
 import * as modal from 'redux/modules/base/modal';
 import * as user from 'redux/modules/base/user';
-import * as sidebarmenu from 'redux/modules/base/sidebarmenu';
 
 // load components
-import Container from 'components/Common/Container';
-import { Header, SidebarButton, BrandLogo, AuthButton, UserButton, UserMenu } from 'components/Base/Header';
+import { 
+    Header,
+    SidebarButton,
+    BrandLogo,
+    AuthButton,
+    UserButton,
+    UserMenu
+} from 'components/Base/Header';
 import { LoginModal, SocialLoginButton } from 'components/Base/Modals/LoginModal';
 import { LinkAccountModal } from 'components/Base/Modals/LinkAccountModal';
-import { Sidebar, SidebarMenu, SidebarMenuSubs } from 'components/Base/Sidebar';
 
 import storage from 'helpers/storage';
 import axios from 'axios';
@@ -98,31 +103,28 @@ class App extends Component {
         }
     })()
 
-    handleMenu = (() => {
-        const { SidebarMenuActions } = this.props;
-        return {
-            setActive: (activeMenu) => {
-                SidebarMenuActions.activeMenu(activeMenu);
-            }
-        }
-    })()
-
     render() {
-        const { status: { modal, user, header, sidebarmenu } } = this.props;
-        const { handleAuth, handleModal, handleLinkAccount, handleUserMenu, handleSidebar, handleMenu } = this;
+        const { status: { modal, user, header } } = this.props;
+        const { handleAuth, handleModal, handleLinkAccount, handleUserMenu, handleSidebar } = this;
         
-        const activemenu = sidebarmenu.get('activemenu');
         const profile = user.get('profile');
         
         return (
             <div>
                 <Header>
-                    <SidebarButton onClick={header.get('sidebar') ? handleSidebar.hide : handleSidebar.show} />
+                    <SidebarButton
+                        onClick={header.get('sidebar')
+                        ? handleSidebar.hide
+                        : handleSidebar.show}
+                    />
                     <BrandLogo/>
 
                     {
                         profile.get('username')
-                        ? <UserButton thumbnail={profile.get('thumbnail')} onClick={handleUserMenu.open}/>
+                            ? <UserButton 
+                                thumbnail={profile.get('thumbnail')}
+                                onClick={handleUserMenu.open}
+                            />
                         : <AuthButton onClick={() => handleModal.open({modalName: 'login'})}/>
                     }
 
@@ -133,54 +135,41 @@ class App extends Component {
                         onLogout={handleUserMenu.logout}/>
                 </Header>
 
-                <LoginModal visible={modal.getIn(['login', 'open'])} onClick={() => handleModal.close('login')}>
-                    <SocialLoginButton onClick={() => handleAuth('github')} type="github"/>
-                    <SocialLoginButton onClick={() => handleAuth('google')} type="google"/>
-                    <SocialLoginButton onClick={() => handleAuth('facebook')} type="facebook"/>
+                <LoginModal
+                    visible={modal.getIn(['login', 'open'])}
+                    onClick={() => handleModal.close('login')}
+                >
+                        <SocialLoginButton onClick={() => handleAuth('github')} type="github"/>
+                        <SocialLoginButton onClick={() => handleAuth('google')} type="google"/>
+                        <SocialLoginButton onClick={() => handleAuth('facebook')} type="facebook"/>
                 </LoginModal>
+                <LinkAccountModal 
+                    visible={modal.getIn(['linkAccount', 'open'])} 
+                    onHide={()=>handleModal.close('linkAccount')}
+                    existingProvider={modal.getIn(['linkAccount', 'existingProvider'])}
+                    provider={modal.getIn(['linkAccount', 'provider'])}
+                    onLinkAccount={handleLinkAccount}
+                    email={modal.getIn(['linkAccount', 'email'])}
+                />
 
-                <Container>
-                    <Sidebar visible={header.get('sidebar')}>
-                        <SidebarMenu ItemID="1" active={activemenu} text="BunkerBuster" onClick={handleMenu.setActive}/>
-                        <SidebarMenu ItemID="2" active={activemenu} text="뉴스피드" onClick={handleMenu.setActive}/>
-                        <SidebarMenu ItemID="3" active={activemenu} text="인기" onClick={handleMenu.setActive}/>
-                        <SidebarMenu ItemID="4" active={activemenu} text="카테고리" onClick={handleMenu.setActive}/>
-                        <SidebarMenuSubs className="menu_header" ItemID="5" active={activemenu} text="구독" onClick={handleMenu.setActive}/>
-                        <SidebarMenuSubs className="menu_subs" ItemID="6" active={activemenu} text="JSP 강좌" count="5" onClick={handleMenu.setActive}/>
-                        <SidebarMenuSubs className="menu_subs" ItemID="7" active={activemenu} text="ReactJS 강좌" count="1" onClick={handleMenu.setActive}/>
-                        <SidebarMenuSubs className="menu_subs" ItemID="8" active={activemenu} text="HTML5 강좌" count="12" onClick={handleMenu.setActive}/>
-                    </Sidebar>
-
-                    <LinkAccountModal 
-                        visible={modal.getIn(['linkAccount', 'open'])} 
-                        onHide={()=>handleModal.close('linkAccount')}
-                        existingProvider={modal.getIn(['linkAccount', 'existingProvider'])}
-                        provider={modal.getIn(['linkAccount', 'provider'])}
-                        onLinkAccount={handleLinkAccount}
-                        email={modal.getIn(['linkAccount', 'email'])}
-                    />
-
-                    <Routes/>
-                </Container>
+                <Routes/>
             </div>
         );
     }
 }
 
 // export default App;
-export default connect(
+export default withRouter(connect(
     state => ({
         status: {
             header: state.base.header,
             modal: state.base.modal,
-            user: state.base.user,
-            sidebarmenu: state.base.sidebarmenu
+            user: state.base.user
         }
     }),
     dispatch => ({
         HeaderActions: bindActionCreators(header, dispatch),
         ModalActions: bindActionCreators(modal, dispatch),
-        UserActions: bindActionCreators(user, dispatch),
-        SidebarMenuActions: bindActionCreators(sidebarmenu, dispatch)
+        UserActions: bindActionCreators(user, dispatch)
     })
-)(App);
+)(App));

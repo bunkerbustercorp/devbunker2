@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Dimmer from 'components/Common/Dimmer';
 import EyeCatchy from 'components/Common/EyeCatchy';
 

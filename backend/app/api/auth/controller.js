@@ -82,7 +82,7 @@ module.exports = {
                      }
                 });
                  
-                const sameEmailUser = await models.User.findByEmail(profile.email);
+                const sameEmailUser = await User.findByEmail(profile.email);
 
                 if(sameEmailUser) {
                     const existingProvider = Object.keys(sameEmailUser.socialId)
@@ -204,6 +204,7 @@ module.exports = {
     },
     checkUsername: async (ctx, next) => {
         const { username } = ctx.params;
+        console.log('test');
         const user = await User.findByUsername(username);
         ctx.body = {
             exists: !!user

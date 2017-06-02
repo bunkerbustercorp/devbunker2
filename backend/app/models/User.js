@@ -28,12 +28,8 @@ User.statics.findByEmail = function(email) {
 }
 
 User.statics.updateSocialId = function(provider, socialId) {
-    const user = this.findByOAuth(provider, socialId).exec();
-
-    const _socialId = user.socialId;
-    _socialId[provider] = socialId;
-    user.socialId = _socialId;
-    return user.save();
+    this.socialId[provider] = socialId
+    return this.save();
 }
 
 module.exports = mongoose.model('User', User);

@@ -8,15 +8,21 @@
     z-index: $z-index-sidebar;
     
     .sidebar {
+        background: white;
         padding-left: 1rem;
         margin: 0 auto;
         width: 16rem;
         height: 100%;
         position: relative;
+        overflow-y: auto;
+    }   
+    .sidebar-spacer {
+        width: 16rem;
+        height: 100%;
     }
 }
 
-.sidebar-spacer {
-    width: 16rem;
-    height: 100%;
+
+.ui right labeled icon button button disabled {
+    background: $oc-cyan-7;
 }
