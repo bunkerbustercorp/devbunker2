@@ -15,7 +15,7 @@ import * as user from 'redux/modules/base/user';
 // load components
 import { 
     Header,
-    SidebarButton,
+    LeftbarButton,
     BrandLogo,
     AuthButton,
     UserButton,
@@ -45,7 +45,7 @@ class App extends Component {
 
     handleAuth = (provider) => {
         // 주어진 provider 로그인 페이지로 이동
-        location.href = `${environment.backendUrl}/api/auth/login/${provider}`
+        location.href = `${environment.backendUrl}/api/auth/login/${provider}`;
     }
 
     handleModal = (() => {
@@ -78,59 +78,66 @@ class App extends Component {
             open: () => {
                 HeaderActions.openUserMenu();
             },
+            onmypage: () => {
+                this.props.history.push('/mypage');
+                HeaderActions.closeUserMenu();
+            },
             logout: () => {
                 storage.remove('profile');
                 storage.remove('token');
                 UserActions.logout();
-                this.context.router.push('/');
+                this.props.history.push('/');
                 HeaderActions.closeUserMenu();
             },
             close: () => {
                 HeaderActions.closeUserMenu();
             }
         }
-    })
+    })()
 
-    handleSidebar = (() => {
+    handleLeftbar = (() => {
         const { HeaderActions } = this.props;
         return {
             show: () => {
-                HeaderActions.showSidebar();
+                HeaderActions.showLeftbar();
             },
             hide: () => {
-                HeaderActions.hideSidebar();
+                HeaderActions.hideLeftbar();
             }
         }
     })()
 
     render() {
         const { status: { modal, user, header } } = this.props;
-        const { handleAuth, handleModal, handleLinkAccount, handleUserMenu, handleSidebar } = this;
+        const { handleAuth, handleModal, handleLinkAccount, handleUserMenu, handleLeftbar } = this;
         
         const profile = user.get('profile');
-        
         return (
             <div>
                 <Header>
-                    <SidebarButton
-                        onClick={header.get('sidebar')
-                        ? handleSidebar.hide
-                        : handleSidebar.show}
+                    <LeftbarButton
+                        onClick={header.get('leftbar')
+                        ? handleLeftbar.hide
+                        : handleLeftbar.show}
                     />
                     <BrandLogo/>
 
                     {
                         profile.get('username')
-                            ? <UserButton 
-                                thumbnail={profile.get('thumbnail')}
-                                onClick={handleUserMenu.open}
-                            />
+                            ? (
+                                <UserButton 
+                                    thumbnail={profile.get('thumbnail')}
+                                    onClick={handleUserMenu.open}>
+                                    {profile.get('username')}
+                                </UserButton>
+                            )
                         : <AuthButton onClick={() => handleModal.open({modalName: 'login'})}/>
                     }
 
                     <UserMenu
                         username={profile.get('username')}
                         visible={header.getIn(['userMenu', 'open'])}
+                        onMyPage={handleUserMenu.onmypage}
                         onHide={handleUserMenu.close}
                         onLogout={handleUserMenu.logout}/>
                 </Header>

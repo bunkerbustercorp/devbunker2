@@ -9,14 +9,13 @@ import * as register from 'redux/modules/register';
 import * as user from 'redux/modules/base/user';
 
 import { 
-    Register,
+    RegisterComponent,
     TitleBar,
     Content,
     PreviousButton,
     InputUsername,
     Loader
 } from 'components/Register';
-import Container from 'components/Common/Container';
 
 import debounce from 'lodash/debounce';
 import { Message } from 'semantic-ui-react';
@@ -122,7 +121,7 @@ class RegisterPage extends Component {
             storage.remove('tempToken');
 
             // 메인 페이지로 라우트
-            this.context.router.push('/');
+            this.context.router.history.push('/');
 
         } catch (e) {
             // 에러 발생!
@@ -190,34 +189,32 @@ class RegisterPage extends Component {
         const { status: { validation, pending }, form: { value } } = this.props;
         
         return (
-            <Container>
-                <Register>
-                    <TitleBar>
-                        <PreviousButton/>
-                    </TitleBar>
-                    <Content>
-                        <InputUsername 
-                            onClick={handleRegister} 
-                            onValidate={handleValidate} 
-                            error={validation.get('valid') === false}
-                            loading={{
-                                check: pending.get('checkUsername'),
-                                register: pending.get('register')
-                            }}
-                            onChange={handleChange}
-                            value={value}
-                        />
-                        {
-                            !validation.get('valid') && (
-                                <Message color="red">
-                                    { messages[validation.get('message')] }
-                                </Message>
-                            )
-                        }
-                        <Loader/>
-                    </Content>
-                </Register>
-            </Container>
+            <RegisterComponent>
+                <TitleBar>
+                    <PreviousButton/>
+                </TitleBar>
+                <Content>
+                    <InputUsername 
+                        onClick={handleRegister} 
+                        onValidate={handleValidate} 
+                        error={validation.get('valid') === false}
+                        loading={{
+                            check: pending.get('checkUsername'),
+                            register: pending.get('register')
+                        }}
+                        onChange={handleChange}
+                        value={value}
+                    />
+                    {
+                        !validation.get('valid') && (
+                            <Message color="red">
+                                { messages[validation.get('message')] }
+                            </Message>
+                        )
+                    }
+                    <Loader/>
+                </Content>
+            </RegisterComponent>
         );
     }
 

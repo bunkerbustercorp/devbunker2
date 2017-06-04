@@ -1,0 +1,82 @@
+.usermenu-wrapper {
+    z-index: $z-index-user-menu;
+    transition: all 0.3s;
+    position: absolute;
+    top: 4.5rem;
+    right: 18rem;
+    .usermenu {
+        position: absolute;
+        width: 15rem;
+        font-size: 14px;
+        text-align: center;
+        background: rgb(255, 255, 255);
+        border-radius: 3px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        
+        .usermenu-item {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            cursor: pointer;
+            text-align: left;
+            // transition: all .3s;
+
+            .usermenu-name {
+                .icon {
+                    font-size: 1rem;
+                    line-height: 1.3rem;
+                    color: $oc-gray-6;
+                    margin-right: 0.5rem;
+                }
+                span {
+                    font-weight: 500;
+                    line-height: 1.3rem;
+                    color: $oc-gray-8;
+                    b { 
+                        font-weight: 600; 
+                    }
+                }
+            }
+
+            &:hover {
+                background: $oc-cyan-7;
+                .usermenu-name {
+                    .icon {
+                        color: $oc-cyan-1;
+                    }
+                    span {
+                        color: white;
+                    }
+                }
+            }
+
+            &:active {
+                background: $oc-cyan-8;
+            }
+        }
+
+        .usermenu-item + .usermneu-item {
+            border-top: 1px solid $oc-gray-2;
+        }
+    }
+    .usermenu:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-width: 0.5rem;
+        border-style: solid;
+        border-color: transparent transparent $oc-gray-9 transparent;
+        top: -1rem;
+        left: 2rem;
+    }
+
+    // 애니메이션 설정
+    &.slideDown, &.slideUp {
+        -webkit-animation-duration: 0.3s;
+        animation-duration: 0.3s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+}

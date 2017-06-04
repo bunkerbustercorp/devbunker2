@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {Provider} from 'react-redux';
+
+import { ApolloProvider } from 'react-apollo';
+import { client } from 'redux/configureStore';
 
 import App from './App';
 
@@ -9,11 +11,11 @@ class Root extends Component {
     render() {
         const {store} = this.props;
         return (
-            <Provider store={store}>
+            <ApolloProvider store={store} client={client}>
                 <Router>
-                    <App/>
+                    <App history={this.props.history}/>
                 </Router>
-            </Provider>
+            </ApolloProvider>
         );
     }
 }

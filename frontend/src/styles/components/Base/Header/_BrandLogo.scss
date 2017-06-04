@@ -1,8 +1,9 @@
-.brand-logo {
+.brandlogo {
     line-height: 4rem;
     font-size: 1.5rem;
     font-weight: 800;
-    color: $oc-cyan-7;
+    color: white;
     display: inline-block;
     user-select: none;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.24);
 }

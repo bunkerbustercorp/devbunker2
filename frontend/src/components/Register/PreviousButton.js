@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const PreviousButton = () => {
     return (
-        <Link className="previous-button" to="/">
+        <Link className="previousbutton" to="/">
             <Icon fitted name="chevron left"/>
             뒤로가기
         </Link>

@@ -50,12 +50,12 @@ class CallbackPage extends Component {
 
         if(query.valid) {
             storage.set('token', token); 
-            const thumbnail = query.thumbnail === "null" ? null : query.thumbnail;
+            const thumbnail = query.thumbnail === "undefined" ? null : query.thumbnail;
             const decoded = jwtDecode(token);
             
             const { displayName, username, userId } = decoded.data;
 
-            const profile = {
+            const profile = {  
                 userId,
                 displayName,
                 username,
@@ -84,14 +84,14 @@ class CallbackPage extends Component {
             // 로컬스토리지에 저장
             storage.set('profile', profile);
 
-            this.context.router.push('/');
+            this.context.router.history.push('/');
             // TODO: 마지막으로 보던 페이지로 이동
         }
 
         if(query.integrate) {
             // 연동할 토큰 스토어에 넣기
             const { provider, existingProvider, email } = query;
-            this.context.router.push('/');
+            this.context.router.history.push('/');
             ModalActions.openModal({
                 modalName: 'linkAccount',
                 data: {

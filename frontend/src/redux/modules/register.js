@@ -10,7 +10,6 @@ const REGISTER = "register/REGISTER";
 const SET_VALIDITY = 'register/SET_VALIDITY';
 const ACCOUNT_LINK = 'register/ACCOUNT_LINK';
 
-
 /* action creators */
 
 export const checkUsername = (username) => ({

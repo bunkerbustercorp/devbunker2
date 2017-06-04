@@ -1,14 +1,13 @@
-.auth-button-wrapper {
+.authbutton-wrapper {
     float: right;
     line-height: 4rem;
-    .auth-button {
+    .authbutton {
         i {
             margin-right: 0.5rem;
         }
         display: inline-block;
-        position: relative;
-        background-color: white;
-        color: $oc-cyan-7;
+        background-color: $oc-cyan-7;
+        color: white;
         font-weight: bold;
         padding-left: 1rem;
         padding-right: 1rem;
@@ -20,18 +19,10 @@
         cursor: pointer;
         user-select: none;
         &:hover {
-            background: $oc-cyan-7;
-            color: white;
+            background: $oc-cyan-8;
         }
         &:active {
-            background: white;
-            color: $oc-cyan-7;
-        }
-    }
-    @include media("<desktop") {
-        .auth-button {
-            background: $oc-cyan-7;
-            color: white;
+            background: $oc-cyan-9;
         }
     }
 }

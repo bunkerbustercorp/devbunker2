@@ -4,9 +4,8 @@ import {
     MainPage,
     RegisterPage,
     CallbackPage,
+    MyPage
 } from './Routes';
-
-import test from './Pages/test';
 
 class Routes extends Component {
     render() {
@@ -15,7 +14,7 @@ class Routes extends Component {
                 <Route exact path="/" component={MainPage}/>
                 <Route path="/callback" component={CallbackPage}/>
                 <Route path="/register" component={RegisterPage}/>
-                <Route path="/test" component={test}/>
+                <Route path="/mypage" component={MyPage}/>
             </div>
         );
     }

@@ -1,4 +1,4 @@
-export { default as Register } from './Register';
+export { default as RegisterComponent } from './RegisterComponent';
 export { default as TitleBar } from './TitleBar';
 export { default as Content } from './Content';
 export { default as PreviousButton } from './PreviousButton';

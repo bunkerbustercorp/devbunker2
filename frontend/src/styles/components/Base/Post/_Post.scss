@@ -1,0 +1,12 @@
+.post {
+    padding: 1rem;
+    background: white;
+    border-color: black;
+    box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.1);
+
+    position: relative;
+}
+.post + .post {
+    margin-top: 1rem;
+    border-top: 1px solid $oc-gray-3;
+}

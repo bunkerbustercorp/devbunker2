@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 var User = new Schema({
-    userName: String,
+    username: String,
     displayName: String,
     socialId: {
         facebook: String,

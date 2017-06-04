@@ -2,23 +2,38 @@ import { createAction, handleActions } from 'redux-actions';
 import { Map } from 'immutable';
 
 /* actions */
-const SIDEBAR_SHOW = "base/header/SIDEBAR_SHOW";
-const SIDEBAR_HIDE = "base/header/SIDEBAR_HIDE";
+const USER_MENU_OPEN = "base/header/USER_MENU_OPEN";
+const USER_MENU_CLOSE = "base/header/USER_MENU_CLOSE";
+
+const LEFTBAR_SHOW = "base/header/LEFTBAR_SHOW";
+const LEFTBAR_HIDE = "base/header/LEFTBAR_HIDE";
 
 /* action creates */
-export const showSidebar = createAction(SIDEBAR_SHOW);
-export const hideSidebar = createAction(SIDEBAR_HIDE);
+export const openUserMenu = createAction(USER_MENU_OPEN);
+export const closeUserMenu = createAction(USER_MENU_CLOSE);
+
+export const showLeftbar = createAction(LEFTBAR_SHOW);
+export const hideLeftbar = createAction(LEFTBAR_HIDE);
 
 /* initialState */
 const initialState = Map({
-    sidebar: true
+    leftbar: true,
+    userMenu: Map({
+        open: false
+    })
 });
 
 export default handleActions({
-    [SIDEBAR_SHOW]: (state, action) => (
-        state.set('sidebar', true)
+    [USER_MENU_OPEN]: (state, action) => (
+        state.setIn(['userMenu', 'open'], true)
     ),
-    [SIDEBAR_HIDE]: (state, action) => (
-        state.set('sidebar', false)
+    [USER_MENU_CLOSE]: (state,action) => (
+        state.setIn(['userMenu', 'open'], false)
+    ),
+    [LEFTBAR_SHOW]: (state, action) => (
+        state.set('leftbar', true)
+    ),
+    [LEFTBAR_HIDE]: (state, action) => (
+        state.set('leftbar', false)
     )
 }, initialState);

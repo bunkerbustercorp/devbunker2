@@ -5,13 +5,14 @@ class InputUsername extends Component {
         const { onClick, error, loading, value, onChange } = this.props;
 
         return (
-            <div className="input-username">
+            <div className="register-inputusername">
                 <Input
+                    className="register-inputsuername-input"
                     action={
-                        { 
+                        {
                             color: 'grey', 
                             labelPosition: 'right', 
-                            icon: 'chevron right', 
+                            icon: 'chevron right',
                             content: '계속하기', 
                             onClick,
                             disabled: error || value === '',

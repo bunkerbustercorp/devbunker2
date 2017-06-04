@@ -4,7 +4,7 @@ import { Loader as SemanticLoader } from 'semantic-ui-react';
 const Loader = ({visible}) => {
     if(!visible) return null;
     return (
-        <div className="loader-container">
+        <div className="register-loader">
             <SemanticLoader active inverted inline size="big"/>
         </div>
     );

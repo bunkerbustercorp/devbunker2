@@ -1,16 +1,16 @@
-.login-modal-wrapper {
+.loginmodal-wrapper {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: $z-index-modal;
-    .login-modal {
+    .loginmodal {
 
         background: white;
         width: 30rem;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
-        .exit {
+        .loginmodal-exit {
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
@@ -27,7 +27,7 @@
             }
         }
 
-        .logo {
+        .loginmodal-logo {
             padding-top: 2rem;
             text-align: center;
             font-size: 3rem;
@@ -38,7 +38,7 @@
             background: $oc-cyan-7;
         }
 
-        .description {
+        .loginmodal-description {
             text-align: center;
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -49,7 +49,7 @@
             }
         }
 
-        .buttons-wrapper {
+        .loginmodal-buttons-wrapper {
             padding-left: 2rem;
             padding-bottom: 2rem;
             padding-right: 2rem;

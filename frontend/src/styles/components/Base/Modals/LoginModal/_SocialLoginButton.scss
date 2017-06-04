@@ -14,12 +14,6 @@
         text-transform: capitalize;
     }
 
-    .icon {
-        position: absolute;
-        left: 2rem;
-        font-size: 2rem;
-    }
-
     &.github {
         background: $oc-gray-1;
         &:hover {

@@ -17,7 +17,8 @@ module.exports = (()=>{
         );
     }
 
-    const scopes = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
+    const scopes = ['https://www.googleapis.com/auth/userinfo.email',
+                    'https://www.googleapis.com/auth/userinfo.profile'];
     
     const url = client.generateAuthUrl({
         scope: scopes

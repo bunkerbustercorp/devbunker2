@@ -1,0 +1,47 @@
+.my-menubar-wrapper{
+    width: 100%;
+    margin-top: 5.5rem;
+    .my-menubar-username {
+        font-size: 1.2rem;
+        color: white;
+        height: 2rem;
+        text-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.24);
+    }
+    .my-menubar {
+        height: 3rem;
+        padding-left: 10rem;
+        background: white;
+        line-height: 3rem;
+        z-index: $z-index-my-menubar;
+
+        .my-menubar-menu {
+            text-align: center;
+            float: left;
+            width: 8rem;
+            cursor: pointer;
+
+            transition: all .4s;
+            &:hover {
+                background: $oc-gray-2;
+            }
+            &:active {
+                background: $oc-gray-4;
+            }
+        }
+        .my-menubar-write {
+            text-align: center;
+            float: right;
+            width: 6rem;
+            margin-right: 2rem;
+            cursor: pointer;
+
+            transition: all .4s;
+            &:hover {
+                background: $oc-gray-2;
+            }
+            &:active {
+                background: $oc-gray-4;
+            }
+        }
+    }
+}

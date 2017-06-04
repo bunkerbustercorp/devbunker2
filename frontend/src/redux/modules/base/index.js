@@ -3,10 +3,10 @@ import modal from './modal';
 import header from './header';
 import auth from './auth';
 import user from './user';
-import sidebarmenu from './sidebarmenu';
+import leftbarmenu from './leftbarmenu';
 
 const common = combineReducers({
-    modal, header, auth, user, sidebarmenu
+    modal, header, auth, user, leftbarmenu
 });
 
 export default common;

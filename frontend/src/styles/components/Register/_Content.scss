@@ -1,13 +1,12 @@
-.content {
+.register-content {
     position: relative;
-    //background: white;
-    .greeting {
+    .register-greeting {
         text-align: center;
         font-size: 4rem;
         line-height: 4rem;
         font-weight: 300;
     }
-    .information {
+    .register-information {
         margin-top: 2rem;
         font-size: 1.5rem;
         color: $oc-gray-7;
@@ -18,11 +17,11 @@
     padding: 2rem;
 
     @include media("<desktop") {
-        .greeting {
+        .register-greeting {
             line-height: 3rem;
             font-size: 3rem;
         }
-        .information {
+        .register-information {
             margin-top: 1.4rem;
             line-height: 1.2rem;
             font-size: 1.2rem;

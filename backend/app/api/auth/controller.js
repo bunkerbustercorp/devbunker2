@@ -71,7 +71,7 @@ module.exports = {
                     username: user.username,
                     displayName: user.displayName
                 });
-
+                
                 ctx.redirect(`${url}/callback?token=${token}&valid=true&thumbnail=${user.thumbnail}`);
             } else {
                  const token = await createToken({
@@ -153,7 +153,6 @@ module.exports = {
         // username 존재 유무 확인
         const usernameExists = await User.findByUsername(username);
 
-
         if(usernameExists) {
             ctx.status = 409;
             ctx.body = {
@@ -171,7 +170,6 @@ module.exports = {
         };
 
         socialId[provider] = id;
-
 
         try {
             result = await User.create({
@@ -192,7 +190,7 @@ module.exports = {
 
         const token = await createToken({
             type: 'user',
-            userId: result.dataValues.id,
+            userId: result._id,
             username: username,
             displayName: displayName
         });
@@ -204,7 +202,6 @@ module.exports = {
     },
     checkUsername: async (ctx, next) => {
         const { username } = ctx.params;
-        console.log('test');
         const user = await User.findByUsername(username);
         ctx.body = {
             exists: !!user

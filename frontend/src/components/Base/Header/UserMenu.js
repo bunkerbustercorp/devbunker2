@@ -3,45 +3,44 @@ import { Icon } from 'semantic-ui-react';
 import EyeCatchy from 'components/Common/EyeCatchy';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-const UserMenu = ({username, visible, onHide, onLogout}) => {
+const UserMenu = ({username, visible, onMyPage, onHide, onLogout}) => {
     return (
         <div>
         <ReactCSSTransitionGroup
             transitionName={{
-                enter: 'flipInX',
-                leave: 'flipOutX'
+                enter: 'slideDown',
+                leave: 'slideUp'
             }}
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
         >
             {
                 visible && (
                     <EyeCatchy onHide={onHide}>
-                        <div className="user-menu-wrapper">
-                            <div className="user-menu">
-                                <div className="menu-item">
-                                    <div className="menu-name">
-                                        <Icon name="user"/><span><b>@{username}</b></span>
+                        <div className="usermenu-wrapper">
+                            <div className="usermenu">
+                                <div className="usermenu-item" onClick={onMyPage}>
+                                    <div className="usermenu-name">
+                                        <Icon name="user"/><span>내 포스트로 이동</span>
                                     </div>
-                                    <div className="description">내 <b>록시</b>로 이동</div>
                                 </div>
-                                <div className="menu-item">
-                                    <div className="menu-name">
+                                <div className="usermenu-item">
+                                    <div className="usermenu-name">
                                         <Icon name="write"/><span>새 포스트</span>
                                     </div>
                                 </div>
-                                <div className="menu-item">
-                                    <div className="menu-name">
+                                <div className="usermenu-item">
+                                    <div className="usermenu-name">
                                         <Icon name="setting"/><span>설정</span>
                                     </div>
                                 </div>
-                                <div className="menu-item">
-                                    <div className="menu-name">
+                                <div className="usermenu-item">
+                                    <div className="usermenu-name">
                                         <Icon name="help circle outline"/><span>고객센터</span>
                                     </div>
                                 </div>
-                                <div className="menu-item" onClick={onLogout}>
-                                    <div className="menu-name">
+                                <div className="usermenu-item" onClick={onLogout}>
+                                    <div className="usermenu-name">
                                         <Icon name="power"/><span>로그아웃</span>
                                     </div>
                                 </div>

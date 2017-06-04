@@ -2,7 +2,7 @@ import React from 'react';
 
 const TitleBar = ({children}) => {
     return (
-        <div className="title-bar">
+        <div className="register-titlebar">
             {children}
         </div>
     );

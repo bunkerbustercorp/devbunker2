@@ -33,16 +33,16 @@ class LoginModal extends Component {
         const animation = closing ? 'slideUp' : 'slideDown';
         return (
             <div>
-                <div className="login-modal-wrapper">
+                <div className="loginmodal-wrapper">
                     <EyeCatchy onHide={onClick}>
-                        <div ref={ref=>{this.modal = ref}} className={`login-modal ${animation}`}>
-                            <div className="exit" onClick={onClick}>✕</div>
-                            <div className="logo">DevBunker</div>
-                            <div className="description">
+                        <div ref={ref=>{this.modal = ref}} className={`loginmodal ${animation}`}>
+                            <div className="loginmodal-exit" onClick={onClick}>✕</div>
+                            <div className="loginmodal-logo">DevBunker</div>
+                            <div className="loginmodal-description">
                                 <p><b>개발자</b>들을 위한 <b>커뮤니티</b>,</p>
                                 <p>여러분들도 한번 <b>시작</b>해보세요!</p>
                             </div>
-                            <div className="buttons-wrapper">
+                            <div className="loginmodal-buttons-wrapper">
                                 {children}
                             </div>
                         </div>
