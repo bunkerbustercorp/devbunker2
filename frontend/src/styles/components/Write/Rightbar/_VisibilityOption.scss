@@ -1,0 +1,42 @@
+.visibility-option {
+    .option-block {
+        transition: all .3s;
+        width: 50%;
+        display: inline-block;
+        text-align: center;
+        background: $oc-gray-2;
+        color: $oc-gray-6;
+
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+
+        border: 1px solid $oc-gray-4;
+        cursor: pointer;
+
+        user-select: none;
+
+        &:hover {
+            background: $oc-gray-1;
+            color: $oc-gray-6;
+        }
+
+        &.active, &:active {
+            background: white;
+            color: $oc-gray-9;
+            font-weight: 500;
+        }
+        
+        &.public {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-right: none;
+        }
+        
+
+        &.private {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            
+        }
+    }
+}

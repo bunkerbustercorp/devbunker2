@@ -3,7 +3,7 @@ import { Icon } from 'semantic-ui-react';
 import EyeCatchy from 'components/Common/EyeCatchy';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-const UserMenu = ({username, visible, onMyPage, onHide, onLogout}) => {
+const UserMenu = ({username, visible, onMyPage, onWrite, onHide, onLogout}) => {
     return (
         <div>
         <ReactCSSTransitionGroup
@@ -24,7 +24,7 @@ const UserMenu = ({username, visible, onMyPage, onHide, onLogout}) => {
                                         <Icon name="user"/><span>내 포스트로 이동</span>
                                     </div>
                                 </div>
-                                <div className="usermenu-item">
+                                <div className="usermenu-item" onClick={onWrite}>
                                     <div className="usermenu-name">
                                         <Icon name="write"/><span>새 포스트</span>
                                     </div>

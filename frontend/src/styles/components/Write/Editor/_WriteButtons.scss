@@ -1,0 +1,32 @@
+.writebuttons-wrapper{
+    width: 13rem;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    .writebuttons {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background: $oc-cyan-7;
+        border: 1px solid $oc-cyan-8;
+        border-radius: 3px;
+        display: inline;
+        font-weight: 400;
+        color: white;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            background: $oc-cyan-8;
+        }
+        &:active {
+            background: $oc-cyan-9;
+        }
+    }
+
+    .writebuttons + .writebuttons {
+        margin-left: 1rem;
+    }
+}

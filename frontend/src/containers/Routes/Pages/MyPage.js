@@ -12,7 +12,7 @@ import { MyComponent, MyHeader, MyThumbnail, MyMenuBar, MyContent } from 'compon
 import { Post, PostHeader, PostContent, PostFooter } from 'components/Base/Post';
 
 class MyPage extends Component {
-    handleMenu = (() => {
+    handleLeftBar = (() => {
         const { LeftbarMenuActions } = this.props;
         return {
             setActive: (activeMenu) => {
@@ -21,9 +21,23 @@ class MyPage extends Component {
         }
     })()
 
+    handleMyHeader = (() => {
+        return {
+            onWrite: () => {
+                this.props.history.push("/write");
+            },
+            onmypage: () => {
+            },
+            logout: () => {
+            },
+            close: () => {
+            }
+        }
+    })()
+
     render() {
         const { status: { header, leftbarmenu, user } } = this.props;
-        const { handleMenu } = this;
+        const { handleLeftBar, handleMyHeader } = this;
 
         const profile = user.get('profile');
         const activemenu = leftbarmenu.get('activemenu');
@@ -35,30 +49,30 @@ class MyPage extends Component {
                         ItemID="1"
                         active={activemenu}
                         text="BunkerBuster"
-                        onClick={handleMenu.setActive}
+                        onClick={handleLeftBar.setActive}
                     />
                     <LeftBarMenu
                         ItemID="2"
                         active={activemenu}
                         text="뉴스피드"
-                        onClick={handleMenu.setActive}
+                        onClick={handleLeftBar.setActive}
                     />
                     <LeftBarMenu ItemID="3"
                         active={activemenu}
                         text="인기"
-                        onClick={handleMenu.setActive}
+                        onClick={handleLeftBar.setActive}
                     />
                     <LeftBarMenu
                         ItemID="4"
                         active={activemenu}
                         text="카테고리"
-                        onClick={handleMenu.setActive}
+                        onClick={handleLeftBar.setActive}
                     />
                     <LeftBarMenuSubs className="leftbarmenu-header"
                         ItemID="5"
                         active={activemenu}
                         text="구독"
-                        onClick={handleMenu.setActive}
+                        onClick={handleLeftBar.setActive}
                     />
                     <LeftBarMenuSubs
                         className="leftbarmenu-subs"
@@ -66,27 +80,27 @@ class MyPage extends Component {
                         active={activemenu}
                         text="JSP 강좌" 
                         count="5" 
-                        onClick={handleMenu.setActive}/>
+                        onClick={handleLeftBar.setActive}/>
                     <LeftBarMenuSubs
                         className="leftbarmenu-subs"
                         ItemID="7"
                         active={activemenu}
                         text="ReactJS 강좌"
                         count="1"
-                        onClick={handleMenu.setActive}/>
+                        onClick={handleLeftBar.setActive}/>
                     <LeftBarMenuSubs className="leftbarmenu-subs"
                         temID="8"
                         active={activemenu}
                         text="HTML5 강좌"
                         count="12"
-                        onClick={handleMenu.setActive}
+                        onClick={handleLeftBar.setActive}
                     />
                 </LeftBar>
                 <MyComponent>
                     <MyHeader>
                         <MyThumbnail thumbnail={profile.get('thumbnail')}>
                         </MyThumbnail>
-                        <MyMenuBar>
+                        <MyMenuBar onWrite={handleMyHeader.onWrite}>
                             {profile.get("username")}
                         </MyMenuBar>
                     </MyHeader>

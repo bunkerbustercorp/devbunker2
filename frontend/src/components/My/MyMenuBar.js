@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 
-const MyMenuBar = ({children}) => {
+const MyMenuBar = ({children, onWrite}) => {
     return (
         <div className="my-menubar-wrapper">
             <div className="my-menubar-username">
@@ -20,7 +20,7 @@ const MyMenuBar = ({children}) => {
                 <div className="my-menubar-menu">
                     구독
                 </div>
-                <div className="my-menubar-write">
+                <div className="my-menubar-write" onClick={onWrite}>
                     <Icon name="write"/>글쓰기
                 </div>
             </div>

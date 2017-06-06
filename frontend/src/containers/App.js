@@ -78,8 +78,12 @@ class App extends Component {
             open: () => {
                 HeaderActions.openUserMenu();
             },
+            onWrite: () => {
+                this.props.history.push('write');
+                HeaderActions.closeUserMenu();
+            },
             onmypage: () => {
-                this.props.history.push('/mypage');
+                this.props.history.push('/my');
                 HeaderActions.closeUserMenu();
             },
             logout: () => {
@@ -137,6 +141,7 @@ class App extends Component {
                     <UserMenu
                         username={profile.get('username')}
                         visible={header.getIn(['userMenu', 'open'])}
+                        onWrite={handleUserMenu.onWrite}
                         onMyPage={handleUserMenu.onmypage}
                         onHide={handleUserMenu.close}
                         onLogout={handleUserMenu.logout}/>

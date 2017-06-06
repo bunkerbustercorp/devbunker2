@@ -1,0 +1,57 @@
+.image-upload-button {
+    padding: 1rem;
+    border: 1px solid $oc-gray-6;
+    background: white;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1.4rem;
+    border-radius: 2px;
+    transition: all .3s;
+    cursor: pointer;
+
+    .image {
+        transition: all .3s;
+        font-size: 3rem;
+        line-height: 3rem;
+        color: $oc-gray-6;
+    }
+
+    .circle {
+        transition: all .3s;
+        display: inline-block;
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        background: $oc-gray-5;
+        border-radius: 0.8rem;
+        position: absolute;
+        width: 1.6rem;
+        height: 1.6rem;
+        margin-top: 2.05rem;
+        margin-left: -0.9rem;
+
+        .add {
+            transition: all .3s;
+            margin-top: 0.24rem;
+            color: white;
+        }
+    }
+
+    &:hover {
+        .image {
+            color: white;
+        }
+        .circle {
+            background: $oc-gray-2;
+            .add {
+                color: $oc-gray-6;
+            }
+        }
+        background: $oc-gray-6;
+        color: white;
+    }
+
+    &:active {
+        background: $oc-gray-8;
+    }
+
+}

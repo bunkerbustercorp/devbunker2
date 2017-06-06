@@ -17,11 +17,10 @@ const PostHeader = ({username, thumbnail}) => {
                 </div>
             </div>
 
-
             <div className="post-header-down">
                 <div className="post-header-username"> {username} </div>
 
-                <div className="post-header-time">2017년 06월 05일</div>
+                <div className="post-header-time">- 2017년 06월 05일</div>
             </div>
         </div>
     );
