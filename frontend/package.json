@@ -5,7 +5,9 @@
   "dependencies": {
     "axios": "^0.16.1",
     "brace": "^0.10.0",
+    "create-react-class": "^15.5.3",
     "highlight.js": "^9.12.0",
+    "history": "^4.6.1",
     "immutable": "^3.8.1",
     "include-media": "^1.4.9",
     "jquery": "^3.2.1",
@@ -16,13 +18,16 @@
     "query-string": "^4.3.4",
     "react": "^15.5.4",
     "react-addons-css-transition-group": "^15.5.2",
+    "react-alert": "^2.0.1",
     "react-apollo": "^1.4.1",
+    "react-custom-scrollbars": "^4.1.2",
     "react-dom": "^15.5.4",
     "react-hot-loader": "next",
     "react-onclickoutside": "^5.11.1",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-ui-tree": "^2.6.0",
     "redux": "^3.6.0",
     "redux-actions": "^2.0.2",
     "redux-promise-middleware": "^4.2.0",
@@ -30,7 +35,8 @@
     "semantic-ui-css": "^2.2.10",
     "semantic-ui-react": "^0.68.2",
     "showdown": "^1.7.1",
-    "styled-components": "^2.0.0"
+    "styled-components": "^2.0.0",
+    "warning": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",

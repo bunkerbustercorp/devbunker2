@@ -8,16 +8,9 @@ import * as write from 'redux/modules/write';
 
 import Container from 'components/Common/Container';
 import { LeftBar, LeftBarMenu, LeftBarMenuSubs } from 'components/Base/LeftBar';
-import { WriteComponent } from 'components/Write/Editor';
-import { 
-    Rightbar,
-    Box,
-    TagInput,
-    TagContainer,
-    VisibilityOption,
-    Category,
-    ImageUploadButton
-} from 'components/Write/Rightbar';
+import { EditorComponent } from 'components/Write/Editor';
+
+import Alert from 'react-alert';
 
 class WritePage extends Component {
     handleMenu = (() => {
@@ -25,74 +18,6 @@ class WritePage extends Component {
         return {
             setActive: (activeMenu) => {
                 LeftbarMenuActions.activeMenu(activeMenu);
-            }
-        }
-    })()
-
-    handleCategory = (() => {
-        const { WriteActions } = this.props;
-
-        return {
-            get: () => {
-                WriteActions.getCategory();
-            },
-            create: () => {
-                WriteActions.createCategory("새 카테고리");
-            },
-            move: ({parentId, index, id}) => {
-                WriteActions.moveCategory({parentId, index, id})
-            },
-            delete: (id) => {
-                WriteActions.deleteCategory(id);
-            },
-            rename: ({id, name}) => {
-                WriteActions.renameCategory({id, name})
-            },
-            toggle: (index) => {
-                WriteActions.toggleCategory(index);
-            }
-        }
-    })()
-
-    handleTag = (() => {
-        const { WriteActions } = this.props;
-
-        return {
-            changeInput: (text) => {               
-                WriteActions.changeTagInput(text)
-            },
-            insert: (text) => {
-
-                // 체크 
-                const check = (t) => {
-                    const list = this.props.status.write.getIn(['tags', 'list']);
-                    const exists = list.filter(item => item.toLowerCase() === t.toLowerCase()).size > 0;
-
-                    return exists;
-                }
-
-                // 태그에 쉼표가 있다
-                if(text.indexOf(',')>0) {
-                    const tags = text.split(',');
-                    tags.forEach(
-                        item => {
-                            // 중복하는 경우 스킵
-                            if(check(item)) return;
-                            if(item === '' || item.trim() === '') return;
-
-                            // 앞뒤에 space 있는경우 없앰 
-                            WriteActions.insertTag(item.trim());
-                        }
-                    );
-                } else {
-                    // 존재시 스킵
-                    if(check(text)) return;
-
-                    WriteActions.insertTag(text.trim());
-                }
-            },
-            remove: (index) => {
-                WriteActions.removeTag(index)
             }
         }
     })()
@@ -115,28 +40,6 @@ class WritePage extends Component {
             },
             setIsLastLine: (value) => {
                 WriteActions.setIsLastLine(value);
-            },
-            setVisibility: (value) => {
-                // 포스트 공개/비공개 설정
-                WriteActions.setVisibility(value);
-            }
-        }
-    })()
-
-    handleModal = (() => {
-        const { ModalActions } = this.props;
-        return {
-            open: ({modalName, data}) => {
-                ModalActions.openModal({modalName, data});
-            },
-            close: (modalName) => {
-                ModalActions.closeModal(modalName);
-            },
-            setError: (modalName) => {
-                return (error) => ModalActions.setError({modalName, error});
-            },
-            setOption: (modalName) => {
-                return ({optionName, value}) => ModalActions.setOption({modalName, optionName, value});
             }
         }
     })()
@@ -150,41 +53,51 @@ class WritePage extends Component {
 
                 const postId = write.getIn(['workingPost', 'postId']);
                 const editor = write.get('editor');
-                
-                const categories = write.getIn(['category', 'flat'])
-                                    .filter(category=>category.get('value'))
-                                    .map(category=>category.get('id'))
-                                    .toJS();
-                
-                const tags = write.getIn(['tags', 'list'])
-                              .toJS();
-                
-                
-                const payload = {
-                    title: editor.get('title'),
-                    content: editor.get('markdown'),
-                    visibility: editor.get('visibility'),
-                    isTemp,
-                    categories,
-                    tags
-                }
 
-                if(!postId) {
-                    // 포스트 아이디가 존재하지 않는 경우에는
-                    // 게시글을 새로 작성한다
-                    return WriteActions.createPost(payload);
+                if(!editor.get('title')) {
+                    this.msg.show('제목을 입력해 주세요', {
+                        time: 2000,
+                        type: 'success',
+                    })
+                }
+                else if(!editor.get('markdown')){
+                    this.msg.show('내용을 입력해 주세요', {
+                        time: 2000,
+                        type: 'success',
+                    })
                 } else {
-                    // 포스트 아이디가 이미 존재하는 경우에는
-                    // payload 에 postId 넣고, updatePost 를 호출
-                    payload.postId = postId;
-                    return WriteActions.updatePost(payload);
+                    const payload = {
+                        title: editor.get('title'),
+                        content: editor.get('markdown'),
+                        isTemp
+                    }
+
+                    if(!postId) {
+                        // 포스트 아이디가 존재하지 않는 경우에는
+                        // 게시글을 새로 작성한다
+                        return WriteActions.createPost(payload);
+                    } else {
+                        // 포스트 아이디가 이미 존재하는 경우에는
+                        // payload 에 postId 넣고, updatePost 를 호출
+                        payload.postId = postId;
+                        return WriteActions.updatePost(payload);
+                    }
                 }
             }
         }
     })()
+
+    alertOptions = {
+        offset: 14,
+        position: 'top right',
+        theme: 'light',
+        time: 5000,
+        transition: 'scale'
+    }
+
     render() {
         const { status: { header, leftbarmenu, write } } = this.props;
-        const { handleMenu, handleEditor, handlePost, handleModal, handleTag, handleCategory  } = this;
+        const { handleMenu, handleEditor, handlePost  } = this;
 
         const activemenu = leftbarmenu.get('activemenu');
         return (
@@ -241,7 +154,7 @@ class WritePage extends Component {
                         onClick={handleMenu.setActive}
                     />
                 </LeftBar>
-                <WriteComponent
+                <EditorComponent
                     onChangeTitle={handleEditor.changeTitle}
                     onChangeMarkdown={handleEditor.changeMarkdown}
                     onSetFullscreen={handleEditor.setFullscreen}
@@ -254,28 +167,8 @@ class WritePage extends Component {
                     isLastLine={write.getIn(['editor', 'isLastLine'])}
                     onSave={handlePost.save}
                     isTemp={write.getIn(['workingPost', 'isTemp'])}>
-                </WriteComponent>
-                <Rightbar
-                    tags={write.get('tags')}
-                    category={write.get('category')}
-                >
-                    <ImageUploadButton/>
-                    <Box title="태그">
-                        <TagInput value={write.getIn(['tags', 'input'])} onChange={handleTag.changeInput} onInsert={handleTag.insert}/>
-                        <TagContainer tags={write.getIn(['tags', 'list'])} onRemove={handleTag.remove}/>
-                    </Box>
-                    <Box title="공개 설정">
-                        <VisibilityOption onChange={handleEditor.setVisibility}/>
-                    </Box>
-                    <Box title="카테고리">
-                        <Category 
-                            category={write.getIn(['category', 'flat'])} 
-                            onConfigure={()=>handleModal.open({modalName: 'category'})} 
-                            onToggle={handleCategory.toggle}
-                        />
-                    </Box>
-
-                </Rightbar>
+                </EditorComponent>
+                <Alert ref={msg => this.msg = msg } {...this.alertOptions}/>
             </Container>
         );
     }

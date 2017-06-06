@@ -1,2 +1,2 @@
 // re-export child components
-export { default as WriteComponent } from './WriteComponent';
+export { default as EditorComponent } from './EditorComponent';

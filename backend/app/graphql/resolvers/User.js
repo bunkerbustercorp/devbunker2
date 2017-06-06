@@ -15,7 +15,6 @@ module.exports = {
         user: async (obj, {username}, ctx) => {
             // username으로 조회
             if(username) {
-                const key = `graphql:user:username:${username}`;
                 const attributes = ['username', 'displayName', 'thumbnail'];
 
                 try {

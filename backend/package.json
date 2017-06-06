@@ -25,7 +25,8 @@
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.0",
-    "mongoose": "^4.10.3"
+    "mongoose": "^4.10.3",
+    "remove-markdown": "^0.1.0"
   },
   "eslintConfig": {
     "extends": "./config/eslint.js"

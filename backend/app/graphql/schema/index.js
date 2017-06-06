@@ -1,5 +1,6 @@
 const User = require('./User');
 const Query = require('./Query');
+const Post = require('./Post');
 
 const Schema = `
     schema {
@@ -10,5 +11,6 @@ const Schema = `
 module.exports = [
     Schema, 
     Query, 
-    User
+    User,
+    Post
 ];
