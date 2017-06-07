@@ -11,7 +11,7 @@ import {
 class Routes extends Component {
     render() {
         return (
-            <div>
+            <div className={`router ${this.props.className}`}>
                 <Route exact path="/" component={MainPage}/>
                 <Route path="/callback" component={CallbackPage}/>
                 <Route path="/register" component={RegisterPage}/>

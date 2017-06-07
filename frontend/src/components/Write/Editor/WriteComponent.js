@@ -19,12 +19,20 @@ const WriteComponent = ({
                             scrollPercentage,
                             isLastLine,
                             onSave,
-                            isTemp
+                            isTemp,
+                            className,
+                            onSetNew
                         }) => {
     return (
         <Content>
-            <div className="write">
-                <WriteHeader onChange={onChangeTitle} onSave={onSave} isTemp={isTemp}/>
+            <div className={`writecomponent ${className}`}>
+                <WriteHeader
+                    onChange={onChangeTitle}
+                    onSave={onSave}
+                    onSetNew={onSetNew}
+                    isTemp={isTemp}
+                    title={title}
+                />
                 <WriteContent>
                     <WriteEditor
                         onChange={onChangeMarkdown} 

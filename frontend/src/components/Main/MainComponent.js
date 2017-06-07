@@ -4,7 +4,9 @@ import Content from '../Common/Content';
 const MainComponent = ({children}) => {
     return (
         <Content>
-            {children}
+            <div className="main">
+                {children}
+            </div>
         </Content>
     );
 };

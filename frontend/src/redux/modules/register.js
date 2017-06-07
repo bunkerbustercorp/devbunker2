@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { Map } from 'immutable';
-import * as auth from 'helpers/WebApi/auth';
+import * as auth from 'helpers/WebApi/auth/auth';
 import pender from 'helpers/pender';
 
 

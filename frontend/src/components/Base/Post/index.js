@@ -3,3 +3,4 @@ export { default as Post } from './Post';
 export { default as PostHeader } from './PostHeader';
 export { default as PostContent } from './PostContent';
 export { default as PostFooter } from './PostFooter';
+export { default as PostOption } from './PostOption';

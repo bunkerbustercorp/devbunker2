@@ -81,10 +81,7 @@ module.exports = {
         const schema = {
             title: Joi.string().required(),
             content: Joi.string().required(),
-            visibility: Joi.string().regex(/^(public|private)$/).required(),
-            isTemp: Joi.boolean().required(),
-            categories: Joi.array().items(Joi.number()).required(),
-            tags: Joi.array().items(Joi.string()).required()
+            isTemp: Joi.boolean().required()
         };
 
         const validate = Joi.validate(ctx.request.body, schema);
@@ -100,10 +97,7 @@ module.exports = {
         const { 
             title,
             content,
-            visibility,
-            isTemp,
-            categories,
-            tags
+            isTemp
         } = ctx.request.body;
 
 
@@ -111,7 +105,7 @@ module.exports = {
 
         // id 로 post를 찾기
 
-        const prev = await models.Post.findById(postId)
+        const prev = await Post.findById(postId)
 
         // 포스트가 존재하지 않는다면 끝낸다.
         if(!prev) {
@@ -133,122 +127,10 @@ module.exports = {
 
         prev.title = title;
         prev.content = content;
-        prev.visibility =  visibility;
+
+        await prev.save();
 
         try {
-            // 임시 -> 공개 
-            if(prev.isTemp && !isTemp) {
-
-                // 공개 할 시에, 카테고리들이 모두 본인의 것인지 확인한다.
-                const checkCategoryOwner = categories.map(
-                    categoryId => {
-                        return models.Category.findById(categoryId)
-                    }
-                );
-
-                // 다 기다린다음에
-                const results = await Promise.all(checkCategoryOwner);
-
-
-                for(let result of results) {
-                    // userId 가 다르면 끝낸다, 혹은 없어도 끝낸다
-                    if(!result || result.userId !== userId) {
-                        ctx.status = 401;
-                        ctx.body = {
-                            message: "no permission to category"
-                        }
-                        return;
-                    }
-                }
-
-                // 카테고리 관련 작업.
-                const createPostCategory = categories.map(
-                    categoryId => {
-                        return models.PostCategory.create({
-                            postId,
-                            categoryId
-                        });
-                    }
-                )
-
-                // 태그 관련 작업
-                const createTag = tags.map(
-                    tag => {
-                        return models.Tag.create({
-                            postId,
-                            tag
-                        })
-                    }
-                );
-
-                /// Promise 를 기다린다
-                await Promise.all(createPostCategory);
-                await Promise.all(createTag);
-
-            }
-
-            // 공개 -> 공개
-            if(!prev.isTemp && !isTemp) {
-
-
-                // 우선 이전 카테고리와 태그를 찾음
-
-                const prevCategory = (await models.PostCategory.findByPostId(postId))
-                                    .map(postCategory => postCategory.categoryId);
-                
-                const prevTag = (await models.Tag.findByPostId(postId))
-                                .map(tag => tag.tag);
-
-                // 추가된 카테고리 / 태그를 구분함 (반대로 구분해야됨)
-                
-                const addedCategory = _.difference(categories, prevCategory);
-                const addedTag = _.difference(tags, prevTag);
-
-                // 위에것들을 추가
-                const createCategory = addedCategory.map(
-                    categoryId => {
-                        return models.PostCategory.create({
-                            postId,
-                            categoryId
-                        });
-                    }
-                )
-
-                const createTag = addedTag.map(
-                    tag => {
-                        return models.Tag.create({
-                            postId,
-                            tag,
-                            userId
-                        })
-                    }
-                );
-
-
-
-
-                // 삭제된 카테고리/태그
-                
-                const deletedCategory = _.difference(prevCategory, categories);
-                const deletedTag = _.difference(prevTag, tags);
-
-                const deleteCategory = deletedCategory.map(
-                    categoryId => models.PostCategory.destroyByPostCategory({postId, categoryId})
-                );
-
-                const deleteTag = deletedTag.map(
-                    tag => models.Tag.destroyByPostTag({postId, tag})
-                );
-
-                
-                // 기다린다
-                await Promise.all(createCategory);
-                await Promise.all(createTag);
-                await Promise.all(deleteCategory);
-                await Promise.all(deleteTag);
-
-            }
-
             ctx.body = {
                 postId,
                 isTemp

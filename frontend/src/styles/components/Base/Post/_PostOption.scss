@@ -1,0 +1,56 @@
+.postoption-wrapper {
+    z-index: $z-index-user-menu;
+    transition: all 0.3s;
+    position: absolute;
+    top: 3rem;
+    right: 4.4rem;
+    .postoption {
+        position: absolute;
+        width: 7rem;
+        text-align: center;
+        background: rgb(255, 255, 255);
+        border-radius: 3px;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        
+        .postoption-item {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            cursor: pointer;
+            text-align: left;
+            // transition: all .3s;
+
+            &:hover {
+                background: $oc-cyan-7;
+            }
+
+            &:active {
+                background: $oc-cyan-8;
+            }
+        }
+
+        .postoption-item + .postoption-item {
+            border-top: 1px solid $oc-gray-2;
+        }
+    }
+    .postoption:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-width: 0.5rem;
+        border-style: solid;
+        border-color: transparent transparent $oc-gray-9 transparent;
+        top: -1rem;
+        left: 2rem;
+    }
+
+    // 애니메이션 설정
+    &.slideDown, &.slideUp {
+        -webkit-animation-duration: 0.3s;
+        animation-duration: 0.3s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+    }
+}

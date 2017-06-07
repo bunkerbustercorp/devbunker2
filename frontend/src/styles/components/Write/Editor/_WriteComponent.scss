@@ -1,7 +1,15 @@
-.write {
+.writecomponent {
+    position: absolute;
     margin: 0 auto;
-    width: 100%;
-    height: 100%;
+    left: 0;
+    right: 0;
+    top: 4rem;
+    bottom: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+
+    &.leftbar {
+        margin-left: 16rem;
+    }
 }

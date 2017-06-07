@@ -3,25 +3,19 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { withRouter } from 'react-router';
 
-import * as leftbarmenuActions from 'redux/modules/base/leftbarmenu';
 import * as write from 'redux/modules/write';
 
 import Container from 'components/Common/Container';
-import { LeftBar, LeftBarMenu, LeftBarMenuSubs } from 'components/Base/LeftBar';
-import { EditorComponent } from 'components/Write/Editor';
+import { WriteComponent } from 'components/Write/Editor';
 
 import Alert from 'react-alert';
 
 class WritePage extends Component {
-    handleMenu = (() => {
-        const { LeftbarMenuActions } = this.props;
-        return {
-            setActive: (activeMenu) => {
-                LeftbarMenuActions.activeMenu(activeMenu);
-            }
-        }
-    })()
 
+    componentDidMount() {
+
+    }
+    
     handleEditor = (() =>{
         const { WriteActions } = this.props;
 
@@ -40,6 +34,9 @@ class WritePage extends Component {
             },
             setIsLastLine: (value) => {
                 WriteActions.setIsLastLine(value);
+            },
+            setNew: () => {
+                WriteActions.initPost();
             }
         }
     })()
@@ -96,78 +93,27 @@ class WritePage extends Component {
     }
 
     render() {
-        const { status: { header, leftbarmenu, write } } = this.props;
-        const { handleMenu, handleEditor, handlePost  } = this;
+        const { status: { write, header } } = this.props;
+        const { handleEditor, handlePost  } = this;
 
-        const activemenu = leftbarmenu.get('activemenu');
         return (
             <Container>
-                <LeftBar visible={header.get('leftbar')}>
-                    <LeftBarMenu 
-                        ItemID="1"
-                        active={activemenu}
-                        text="BunkerBuster"
-                        onClick={handleMenu.setActive}
-                    />
-                    <LeftBarMenu
-                        ItemID="2"
-                        active={activemenu}
-                        text="뉴스피드"
-                        onClick={handleMenu.setActive}
-                    />
-                    <LeftBarMenu ItemID="3"
-                        active={activemenu}
-                        text="인기"
-                        onClick={handleMenu.setActive}
-                    />
-                    <LeftBarMenu
-                        ItemID="4"
-                        active={activemenu}
-                        text="카테고리"
-                        onClick={handleMenu.setActive}
-                    />
-                    <LeftBarMenuSubs className="leftbarmenu-header"
-                        ItemID="5"
-                        active={activemenu}
-                        text="구독"
-                        onClick={handleMenu.setActive}
-                    />
-                    <LeftBarMenuSubs
-                        className="leftbarmenu-subs"
-                        ItemID="6"
-                        active={activemenu}
-                        text="JSP 강좌" 
-                        count="5" 
-                        onClick={handleMenu.setActive}/>
-                    <LeftBarMenuSubs
-                        className="leftbarmenu-subs"
-                        ItemID="7"
-                        active={activemenu}
-                        text="ReactJS 강좌"
-                        count="1"
-                        onClick={handleMenu.setActive}/>
-                    <LeftBarMenuSubs className="leftbarmenu-subs"
-                        temID="8"
-                        active={activemenu}
-                        text="HTML5 강좌"
-                        count="12"
-                        onClick={handleMenu.setActive}
-                    />
-                </LeftBar>
-                <EditorComponent
+                <WriteComponent
                     onChangeTitle={handleEditor.changeTitle}
                     onChangeMarkdown={handleEditor.changeMarkdown}
                     onSetFullscreen={handleEditor.setFullscreen}
                     onSetScrollPercentage={handleEditor.setScrollPercentage}
                     onSetIsLastLine={handleEditor.setIsLastLine}
+                    onSetNew={handleEditor.setNew}
                     title={write.getIn(['editor', 'title'])}
                     markdown={write.getIn(['editor', 'markdown'])}
                     fullscreen={write.getIn(['editor', 'fullscreen'])}
                     scrollPercentage={write.getIn(['editor', 'scrollPercentage'])}
                     isLastLine={write.getIn(['editor', 'isLastLine'])}
                     onSave={handlePost.save}
-                    isTemp={write.getIn(['workingPost', 'isTemp'])}>
-                </EditorComponent>
+                    isTemp={write.getIn(['workingPost', 'isTemp'])}
+                    className={header.get('leftbar') ? "leftbar" : ''}>
+                </WriteComponent>
                 <Alert ref={msg => this.msg = msg } {...this.alertOptions}/>
             </Container>
         );
@@ -178,13 +124,11 @@ class WritePage extends Component {
 export default withRouter(connect(
     state => ({
         status: {
-            header: state.base.header,
-            leftbarmenu: state.base.leftbarmenu,
-            write: state.write
+            write: state.write,
+            header: state.base.header
         }
     }),
     dispatch => ({
-        LeftbarMenuActions: bindActionCreators(leftbarmenuActions, dispatch),
         WriteActions: bindActionCreators(write, dispatch)
     })
 )(WritePage));

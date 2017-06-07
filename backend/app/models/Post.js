@@ -15,18 +15,7 @@ var Post = new Schema({
     }
 });
 
-Post.statics.findById = function(id) {
-    const IdString = `ObjectId(${id}`;
-
-    return this.findOne({ '_id': IdString}).exec();
+Post.statics.findByUserId = function(userId) {
+    return this.find({'userId': userId}).exec();
 }
-
-Post.statics.findByUsername = function(username) {
-    return this.findOne({ 'username': username}).exec();
-}
-
-Post.statics.findByEmail = function(email) {
-    return this.findOne({ 'email': email}).exec();
-}
-
 module.exports = mongoose.model('Post', Post);

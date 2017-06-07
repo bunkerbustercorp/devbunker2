@@ -38,12 +38,10 @@ class WritePreview extends Component {
         });
 
         $('pre code').each(function(i, block) {
-            console.log('a');
             hljs.highlightBlock(block);
         });
     }
-
-
+    
     componentWillReceiveProps(nextProps) {
         
         if(nextProps.markdown === this.props.markdown && nextProps.title === this.props.title) return;
@@ -54,7 +52,7 @@ class WritePreview extends Component {
         this.setState({
             html
         });
-    }    
+    }
 
     componentDidUpdate(prevProps, prevState) {
 

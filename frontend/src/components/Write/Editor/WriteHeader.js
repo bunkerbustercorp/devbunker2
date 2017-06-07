@@ -10,6 +10,18 @@ class WriteHeader extends Component {
         this.delayedChange = debounce(this.delayedChange, 100);
     }
 
+    componentDidMount() {
+        this.refs.title.value=this.props.title;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.title === this.props.title) return;
+
+        if(nextProps.title === '') {
+            this.refs.title.value='';
+        }
+    }
+
     handleChange = (e) => {
         e.persist();
         this.delayedChange(e);
@@ -22,13 +34,13 @@ class WriteHeader extends Component {
     
     render() {
         const { handleChange } = this;
-        const { onSave, isTemp } = this.props;
+        const { onSave, isTemp, onSetNew } = this.props;
 
         return (
             <div className="writeheader-wrapper">
                 <div className="writeheader-title">
-                    <WriteButtons onSave={onSave} isTemp={isTemp}/>
-                    <input type="text" placeholder="포스트 제목" onChange={handleChange}></input>
+                    <WriteButtons onSave={onSave} isTemp={isTemp} onSetNew={onSetNew}/>
+                    <input ref="title" type="text" placeholder="포스트 제목" onChange={handleChange}></input>
                 </div>
                 <div className="writeheader-toolbar">
                     {/*굵게 기울임 왼쪽정렬 가운데정렬 오른쪽정렬 리스트 링크 자바스크립트*/}

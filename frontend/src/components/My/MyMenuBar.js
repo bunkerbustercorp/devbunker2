@@ -12,13 +12,13 @@ const MyMenuBar = ({children, onWrite}) => {
                     포스트
                 </div>
                 <div className="my-menubar-menu">
-                    카테고리
+                    카테고리 (개발 예정)
                 </div>
                 <div className="my-menubar-menu">
-                    정보
+                    정보 (개발 예정)
                 </div>
                 <div className="my-menubar-menu">
-                    구독
+                    구독 (개발 예정)
                 </div>
                 <div className="my-menubar-write" onClick={onWrite}>
                     <Icon name="write"/>글쓰기

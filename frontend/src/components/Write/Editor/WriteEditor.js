@@ -36,6 +36,15 @@ class WriteEditor extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.value === this.props.value) return;
+
+        if(nextProps.value === '') {
+            const { value } = nextProps;
+            this.writeeditor.setValue(value);
+        }
+    }
+
     componentWillUnmount() {
         this.writeeditor.getSession().removeAllListeners('changeScrollTop');
     }

@@ -9,6 +9,8 @@ import base from './modules/base';
 import form from './modules/form';
 import register from './modules/register';
 import write from './modules/write';
+import main from './modules/main';
+import my from './modules/my';
 
 // Initialize Apollo ApolloClient
 const networkInterface = createNetworkInterface({
@@ -47,7 +49,9 @@ const reducer = combineReducers({
     base,
     form,
     register,
-    write
+    write,
+    main,
+    my
     
 });
 

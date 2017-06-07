@@ -26,7 +26,7 @@ import axios from 'axios';
 
 const messages = {
     'UNKNOWN_ERROR': '알 수 없는 에러 발생!',
-    'INVALID_FORMAT': '4~20자의 영문 소문자, 숫자와 밑줄(_)만 사용 가능합니다.',
+    'INVALID_FORMAT': '4~20자의 영문, 숫자와 밑줄(_)만 사용 가능합니다.',
     'USERNAME_EXISTS': '이미 존재하는 아이디입니다.'
 }
 
